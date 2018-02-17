@@ -19,13 +19,12 @@ module.exports = {
             scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
             sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax' // <style lang="sass">
           }
-          // other vue-loader options go here
         }
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -40,7 +39,9 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      'sass': path.resolve(__dirname, './sass')
+      'sass': path.resolve(__dirname, './sass'),
+
+      'modules': path.resolve(__dirname, 'modules')
     }
   },
   devServer: {

@@ -1,26 +1,36 @@
 <template>
   <div id="app">
-      <h1 class="is-size-1" id="welcome">{{msg}}</h1>
+      <h1 class="is-size-1" id="welcome">{{this.$config.welcome}}</h1>
+      <FoyerBookmark/>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'app',
-  data () {
+  data: () => {
     return {
-      msg: 'Welcome to your foyer!'
+      welcome: ""
     }
   },
   components: {
+  },
+  methods: {
+    getConfig: () => {
+    }
+  },
+  beforeMount () {
   }
 }
 </script>
 
 <style lang="scss">
   @import "~sass/global.scss";
-  #welcome {
+  #app {
     text-align: center;
     padding-top: 20%;
+    padding-left: 20%;
+    padding-right: 20%;
   }
 </style>
