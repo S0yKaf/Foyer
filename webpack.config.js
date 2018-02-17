@@ -11,28 +11,34 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
+        test: /\.js$/,
+        use: ['babel-loader', 'import-glob'],
         exclude: /node_modules/,
-        options: {
-          loaders: {
-            scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
-            sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax' // <style lang="sass">
-          }
-        }
       },
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
+        test: /\.vue$/,
+        use: [{
+          loader: 'vue-loader',
+          options: {
+            loaders: {
+              scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
+              sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax' // <style lang="sass">
+            }
+          }
+        }]
+      },
+      {
+        test: /\.css$/,
+        use: ['css-loader'],
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        exclude: /node_modules/,
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
+        use:[{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]?[hash]'
+          }
+        }]
       }
     ]
   },
@@ -41,7 +47,7 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js',
       'sass': path.resolve(__dirname, './sass'),
 
-      'modules': path.resolve(__dirname, 'modules')
+      'plugins': path.resolve(__dirname, 'plugins')
     }
   },
   devServer: {
