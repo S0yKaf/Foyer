@@ -1,23 +1,25 @@
 import Vue from 'vue';
-import axios from 'axios';
-import { Container, Box } from '@dattn/dnd-grid'
+
+import FoyerConfig from './FoyerConfig';
+Vue.use(FoyerConfig);
+
+import {Container, Box} from '@dattn/dnd-grid';
+Vue.component('DndGridContainer', Container);
+Vue.component('DndGridBox', Box);
+
+// Load all modules inside plugins/ as global components
+import plugins from '../plugins/**/*.vue';
+plugins.map(plugin => {
+  Vue.component(plugin.default.name, plugin.default);
+});
 
 import App from './App.vue';
 
-// plugins
-import plugins from '../plugins/**/*.vue';
-
-// global config
-axios.get('/static/config.json')
+const app = new Vue({
+  render: h => h(App)
+});
+// load config and start app
+app.$config.initConfig()
   .then(res => {
-    Vue.prototype.$config = res.data;
-  })
-  .then(() => {
-    // register all plugins
-    plugins.map(plugin => {
-      Vue.component(plugin.default.name, plugin.default);
-    });
-    const app = new Vue({
-      render: h => h(App)
-    }).$mount('#app');
+    app.$mount('#app');
   });

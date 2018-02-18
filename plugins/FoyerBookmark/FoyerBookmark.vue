@@ -16,15 +16,31 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   name: 'FoyerBookmark',
   data: () => {
     return {
-      bookmarks: {}
+      name: 'FoyerBookmark',
+      config: {
+        "Twitch": {
+          "Following": "https://twitch.tv/following"
+        },
+        "Youtube": {
+          "subscriptions": "https://www.youtube.com/feed/subscriptions"
+        }
+      }
     }
   },
-  mounted: () => {}
+  beforeMount () {
+    var self = this;
+    this.$config.register(this.name, this.config)
+      .then(res => {
+        if (res === self.config) {
+          return self.$config.saveConfig();
+        }
+        self.config = res;
+      })
+  }
 }
 </script>
 

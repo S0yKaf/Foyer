@@ -17,7 +17,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from bottle import run, post, get, route, static_file
+import json
+
+from bottle import run, post, get, route, static_file, request
 
 
 @route('/static/<path>')
@@ -25,8 +27,16 @@ def static(path):
     return static_file(path, root="static")
 
 
+@post('/save')
+def saveConfig():
+    # TODO make this more secure / error handling
+    with open('./static/config.json', 'w') as out:
+        json.dump(request.json, out)
+
+
 @route('/')
 def index():
     return static_file('index.html', root="static")
+
 
 run(host='localhost', port=9001)

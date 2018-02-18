@@ -1,5 +1,6 @@
 # Project Specific
 static/build.js
+static/config.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

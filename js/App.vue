@@ -1,17 +1,28 @@
 <template>
   <div id="app">
-      <h1 class="is-size-1" id="welcome">{{this.$config.welcome}}</h1>
+      <h1 class="is-size-1" id="welcome">{{config.welcome}}</h1>
       <FoyerBookmark/>
+      <dnd-grid-container
+      :gridSize="100"
+      :margin="100"
+      :bubbleUp="false">
+        <dnd-grid-box>
+          <FoyerBookmark/>
+        </dnd-grid-box>
+      </dnd-grid-container>
+
   </div>
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   name: 'app',
   data: () => {
     return {
-      welcome: ""
+      name: 'app',
+      config: {
+        welcome: "Welcome to your Foyer."
+      }
     }
   },
   components: {
@@ -21,6 +32,14 @@ export default {
     }
   },
   beforeMount () {
+    var self = this;
+    this.$config.register(this.name, this.config)
+      .then(res => {
+        if (res === self.config) {
+          return self.$config.saveConfig();
+        }
+        self.config = res;
+      })
   }
 }
 </script>
