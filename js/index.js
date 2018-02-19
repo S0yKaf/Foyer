@@ -9,8 +9,10 @@ Vue.component('DndGridBox', Box);
 
 // Load all modules inside plugins/ as global components
 import plugins from '../plugins/**/*.vue';
+Vue.prototype.$availablePlugins =
 plugins.map(plugin => {
   Vue.component(plugin.default.name, plugin.default);
+  return plugin.default.name;
 });
 
 import App from './App.vue';

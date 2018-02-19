@@ -30,16 +30,6 @@ export default {
         }
       }
     }
-  },
-  beforeMount () {
-    var self = this;
-    this.$config.register(this.name, this.config)
-      .then(res => {
-        if (res === self.config) {
-          return self.$config.saveConfig();
-        }
-        self.config = res;
-      })
   }
 }
 </script>

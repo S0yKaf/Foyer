@@ -20,13 +20,11 @@ class FoyerConfig {
   }
 
   setConfig(name, value) {
-    return new Promise((resolve, reject) => {
-      if (!this.config[name]) {
-        return reject();
-      }
-      this.config[name] = value;
-      return resolve(this.config[name]);
-    });
+    if (!this.config[name]) {
+      return Promise.reject();
+    }
+    this.config[name] = value;
+    return Promise.resolve(this.config[name]);
   }
 
   initConfig() {
@@ -59,5 +57,18 @@ class FoyerConfig {
 export default {
   install(Vue, options) {
     Vue.prototype.$config = new FoyerConfig();
+
+    Vue.mixin({
+      beforeMount: function () {
+        var self = this;
+        this.$config.register(this.name, this.config)
+          .then(res => {
+            if (res === self.config) {
+              return self.$config.saveConfig();
+            }
+            self.config = res;
+          });
+      }
+    });
   },
 }
