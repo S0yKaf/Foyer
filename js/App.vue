@@ -3,10 +3,10 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-item">
         <a class="navbar-item button is-primary" v-show="!editing" v-on:click="toggleEdit()">
-          Edit
+          <i class="fas fa-edit"></i>&nbspEdit
         </a>
         <a class="navbar-item button is-primary" v-show="editing" v-on:click="saveLayout()">
-          Save
+          <i class="fas fa-save"></i>&nbspSave
         </a>
         <div class="navbar-item field" v-show="editing">
           <div class="control is-expanded">
@@ -29,10 +29,12 @@
     :gridSize="config.gridSize"
     :margin="config.margin"
     :bubbleUp="config.bubbleUp">
-      <dnd-grid-box v-for="item in config.layout" :boxId="item.id" dragSelector="div.card-header" :key="item.id">
+      <dnd-grid-box v-for="item in config.layout" :boxId="item.id"
+       dragSelector="div.card-header"
+       :key="item.id" v-bind:class="{'editing': editing}">
         <div class="card-header" v-show="editing">
           <span v-on:click="removeComponent(item)" class="icon has-text-danger has-text-right">
-            <i class="is-pulled-right fa-ban"></i>
+            <i class="fas fa-trash"></i>
           </span>
           <span>{{item.type}}</span>
         </div>
