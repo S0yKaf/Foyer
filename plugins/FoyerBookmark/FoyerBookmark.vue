@@ -1,17 +1,13 @@
 <template>
   <div id="FoyerBookmark">
-    <table class="table is-bordered">
-      <thead>
-        <tr>
-          <th><a href="https://twitch.tv/">Twitch</a></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="https://twitch.tv/following">Following</a></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="columns">
+      <div class="column" v-for="(items, name) in config" :key="name">
+        <h1 class="shadow myBox">{{name}}</h1>
+        <div class="shadow myBox" v-for="(link, title) in items" :key="title">
+          <a :href="link">{{title}}</a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -26,7 +22,7 @@ export default {
           "Following": "https://twitch.tv/following"
         },
         "Youtube": {
-          "subscriptions": "https://www.youtube.com/feed/subscriptions"
+          "subscriptions": "https://www.youtube.com/feed/subscriptions",
         }
       }
     }
@@ -36,5 +32,20 @@ export default {
 
 <style lang="scss">
   @import "~sass/global.scss";
-
+  .column {
+    text-align: center;
+  }
+  .shadow {
+    box-shadow: 10px 10px 2px darken($dark, 2);
+  }
+  a {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+  }
+  .myBox {
+    padding: 1em;
+    margin-top: 1em;
+    border: solid #5B6DCD 1px;
+  }
 </style>

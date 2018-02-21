@@ -31,7 +31,7 @@
     :bubbleUp="config.bubbleUp">
       <dnd-grid-box v-for="item in config.layout" :boxId="item.id"
        dragSelector="div.card-header"
-       :key="item.id" v-bind:class="{'editing': editing}">
+       :key="item.id" :class="{'editing': editing}">
         <div class="card-header" v-show="editing">
           <span v-on:click="removeComponent(item)" class="icon has-text-danger has-text-right">
             <i class="fas fa-trash"></i>
