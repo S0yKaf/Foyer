@@ -13,7 +13,6 @@ module.exports = {
       {
         test: /\.js$/,
         use: ['babel-loader', 'import-glob'],
-        exclude: /node_modules/,
       },
       {
         test: /\.vue$/,
@@ -45,7 +44,8 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      'sass': path.resolve(__dirname, './sass')
+      'sass': path.resolve(__dirname, './sass'),
+      'EventBus': path.resolve(__dirname, './js/EventBus.js')
     }
   },
   devServer: {
