@@ -36,9 +36,12 @@
           <span v-on:click="removeComponent(item)" class="icon has-text-danger has-text-right">
             <i class="fas fa-trash"></i>
           </span>
-          <span>{{item.type}}</span>
+          <span v-on:click="editItem(item)" class="icon has-text-right">
+            <i class="fas fa-edit"></i>
+          </span>
+          <span class="no-select">{{item.type}}</span>
         </div>
-        <component v-bind:is="item.type"/>
+        <component :editing="item.editing" v-bind:is="item.type"/>
       </dnd-grid-box>
     </dnd-grid-container>
   </div>
@@ -46,6 +49,7 @@
 
 <script>
 import uuid from 'uuid/v1';
+import { EventBus } from 'EventBus';
 export default {
   name: 'app',
   data: () => {
@@ -66,6 +70,7 @@ export default {
           {
             id: 'box1',
             type: 'FoyerBookmark',
+            editing: false,
             hidden: false,
             pinned: true,
             position: {
@@ -76,8 +81,6 @@ export default {
       }
     }
   },
-  components: {
-  },
   methods: {
     saveLayout () {
       this.$config.setConfig(this.name, this.config)
@@ -86,10 +89,17 @@ export default {
         })
       this.toggleEdit();
     },
+    editItem(item) {
+      item.editing = !item.editing;
+      EventBus.$emit(`edit-${item.type}`);
+    },
     toggleEdit() {
       this.editing = !this.editing;
       this.config.layout.map(item => {
         item.pinned = !this.editing;
+        if (!this.editing) {
+          item.editing = false;
+        }
       })
     },
     addComponent (type) {
@@ -100,6 +110,7 @@ export default {
           id: uuid(),
           type: type,
           hidden: false,
+          editing: false,
           pinned: false,
           position: {
             x: 0, y: 0, w: 2, h: 1
@@ -133,5 +144,8 @@ export default {
     background-color: $nav-hover;
     padding: 1px;
     margin-bottom: 5px;
+  }
+  .no-select {
+    pointer-events: none;
   }
 </style>
