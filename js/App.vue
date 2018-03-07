@@ -74,7 +74,7 @@ export default {
             hidden: false,
             pinned: true,
             position: {
-              x: 2, y: 2, w: 2, h: 2
+              x: 2, y: 2, w: 40, h: 20
             }
           }
         ]
@@ -113,7 +113,7 @@ export default {
           editing: false,
           pinned: false,
           position: {
-            x: 0, y: 0, w: 2, h: 1
+            x: 0, y: 0, w: 20, h: 10
           }
         });
     },
