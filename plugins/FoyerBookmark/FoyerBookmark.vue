@@ -1,6 +1,6 @@
 <template>
   <div id="FoyerBookmark">
-    <div class="columns" v-show="!editing">
+    <div class="columns" v-show="!edit">
       <div class="column" v-for="(items, name) in config" :key="name">
         <h1 class="shadow myBox title">{{name}}</h1>
         <div class="shadow myBox" v-for="(link, title) in items" :key="title">
@@ -11,8 +11,8 @@
       </div>
     </div>
 
-    <div v-show="editing">
-      <a class="navbar-item button is-primary" v-on:click="save()">
+    <div class="edit" v-show="edit">
+      <a class="button is-primary" v-on:click="save()">
         <i class="fas fa-save"></i>&nbspSave
       </a>
       <codemirror v-model="stringConfig" :options="cmOptions"></codemirror>
@@ -22,8 +22,9 @@
 </template>
 
 <script>
-import 'codemirror/mode/javascript/javascript.js'
-import { codemirror } from 'vue-codemirror';
+import { codemirror } from 'vue-codemirror-lite';
+require('codemirror/mode/javascript/javascript.js');
+require('codemirror/mode/vue/vue');
 import { EventBus } from 'EventBus';
 
 export default {
@@ -36,7 +37,7 @@ export default {
     return {
       name: 'FoyerBookmark',
       firstLoad: true,
-      editing: false,
+      edit: false,
       stringConfig: "",
       cmOptions: {
         tabSize: 4,
@@ -62,12 +63,17 @@ export default {
       this.firstLoad = false;
     }
   },
+  watch: {
+    editing: function (val) {
+      this.edit = val;
+    }
+  },
   methods: {
     save () {
       if (!JSON.parse(this.stringConfig)) {
         return;
       }
-      this.editing = !this.editing;
+      this.edit = !this.edit;
       this.config = JSON.parse(this.stringConfig);
       this.$config.setConfig(this.name, this.config);
     }
@@ -82,12 +88,13 @@ export default {
   .column {
     text-align: center;
   }
-  a {
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-  }
   .title {
     color: $purple
+  }
+  .edit a {
+    margin: 0.2em;
+    overflow: hidden;
+  }
+  .CodeMirror {
   }
 </style>

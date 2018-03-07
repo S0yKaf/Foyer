@@ -50,6 +50,7 @@ $navbar-divider-background-color: $dark;
 
 .dnd-grid-box {
     position: absolute;
+    overflow: hidden;
     z-index: 1;
 }
 
@@ -57,6 +58,11 @@ $navbar-divider-background-color: $dark;
   border: solid #5B6DCD 1px;
   box-sizing: content-box;
   box-shadow: 10px 10px 2px darken($dark, 2);
+
+  .resize-handle {
+    background-color: red;
+    z-index: 100;
+  }
 }
 
 .dnd-grid-box.dragging,

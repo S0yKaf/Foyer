@@ -61,8 +61,8 @@ export default {
       config: {
         welcome: "Welcome to your Foyer.",
         gridSize: {
-          w: 100,
-          h: 100
+          w: 1,
+          h: 1
         },
         bubbleUp: false,
         margin: 10,
@@ -139,6 +139,7 @@ export default {
   .component-container {
     height: 100%;
     width: 100%;
+    overflow: hidden;
   }
   .card-header {
     background-color: $nav-hover;
