@@ -95,6 +95,4 @@ export default {
     margin: 0.2em;
     overflow: hidden;
   }
-  .CodeMirror {
-  }
 </style>

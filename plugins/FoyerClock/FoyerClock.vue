@@ -22,7 +22,6 @@
           Show Year
         </label>
       </div>
-</div>
     </div>
   </div>
 </template>
@@ -37,14 +36,6 @@ export default {
       firstLoad: true,
       edit: false,
       now: new Date,
-      stringConfig: "",
-      cmOptions: {
-        tabSize: 4,
-        mode: 'application/json',
-        theme: 'base16-dark',
-        lineNumbers: true,
-        line: true,
-      },
       config: {
         seconds: false,
         year: true
