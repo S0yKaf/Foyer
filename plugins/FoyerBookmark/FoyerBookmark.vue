@@ -36,7 +36,6 @@ export default {
   data: () => {
     return {
       name: 'FoyerBookmark',
-      firstLoad: true,
       edit: false,
       stringConfig: "",
       cmOptions: {
@@ -56,16 +55,12 @@ export default {
       }
     }
   },
-  beforeUpdate () {
-    // TODO REMOVE THIS HACK
-    if (this.firstLoad) {
-      this.stringConfig = JSON.stringify(this.config, null, 4);
-      this.firstLoad = false;
-    }
-  },
   watch: {
     editing: function (val) {
       this.edit = val;
+    },
+    config: function (val) {
+      this.stringConfig = JSON.stringify(this.config, null, 4);
     }
   },
   methods: {

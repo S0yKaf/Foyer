@@ -33,7 +33,6 @@ export default {
   data: () => {
     return {
       name: 'FoyerClock',
-      firstLoad: true,
       edit: false,
       now: new Date,
       config: {
