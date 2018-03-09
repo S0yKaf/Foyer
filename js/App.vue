@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="hoverzone" @mouseover="hovering = true" :class="{'no-select': hovering || editing}"></div>
+    <div class="exitzone" @mouseleave="toggleHovering()" :class="{'no-select': !hovering || editing}"> </div>
+    <nav class="navbar" role="navigation" aria-label="main navigation" @mouseover="hovering = true" v-show="hovering">
       <div class="navbar-item">
         <a class="navbar-item button is-primary" v-show="!editing" v-on:click="toggleEdit()">
           <i class="fas fa-edit"></i>&nbspEdit
@@ -57,6 +59,7 @@ export default {
       name: 'app',
       selected: "",
       editing: false,
+      hovering: false,
       componentList: {},
       config: {
         welcome: "Welcome to your Foyer.",
@@ -82,12 +85,17 @@ export default {
     }
   },
   methods: {
+    toggleHovering () {
+      if (this.editing) return;
+      this.hovering = !this.hovering;
+    },
     saveLayout () {
       this.$config.setConfig(this.name, this.config)
         .then(res => {
           this.$config.saveConfig();
         })
       this.toggleEdit();
+      this.toggleHovering();
     },
     editItem(item) {
       item.editing = !item.editing;
@@ -135,6 +143,21 @@ export default {
   @import "~sass/global.scss";
   #app {
     padding: 1em;
+  }
+  .hoverzone {
+    position: fixed;
+    height: 3%;
+    width: 100%;
+    z-index: 101;
+  }
+  .exitzone {
+    position: fixed;
+    height: 20%;
+    width: 100%;
+    z-index: 20;
+  }
+  .navbar {
+    z-index: 50;
   }
   .component-container {
     height: 100%;
