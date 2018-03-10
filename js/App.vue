@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    <div class="hoverzone" @mouseover="hovering = true" :class="{'no-select': hovering || editing}"></div>
-    <div class="exitzone" @mouseleave="toggleHovering()" :class="{'no-select': !hovering || editing}"> </div>
-    <nav class="navbar" role="navigation" aria-label="main navigation" @mouseover="hovering = true" v-show="hovering">
+    <div class="hoverzone" @click="toggleHovering()"></div>
+    <nav class="navbar" role="navigation" aria-label="main navigation" @click="toggleHovering()" v-show="hovering">
       <div class="navbar-item">
         <a class="navbar-item button is-primary" v-show="!editing" v-on:click="toggleEdit()">
           <i class="fas fa-edit"></i>&nbspEdit
@@ -94,8 +93,8 @@ export default {
         .then(res => {
           this.$config.saveConfig();
         })
+      this.hovering = false;
       this.toggleEdit();
-      this.toggleHovering();
     },
     editItem(item) {
       item.editing = !item.editing;
@@ -146,18 +145,12 @@ export default {
   }
   .hoverzone {
     position: fixed;
-    height: 3%;
-    width: 100%;
-    z-index: 101;
-  }
-  .exitzone {
-    position: fixed;
     height: 20%;
     width: 100%;
-    z-index: 20;
+    z-index: 100;
   }
   .navbar {
-    z-index: 50;
+    z-index: 101;
   }
   .component-container {
     height: 100%;
