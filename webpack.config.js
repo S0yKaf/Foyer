@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 module.exports = {
   entry: './js/index.js',
@@ -55,7 +56,11 @@ module.exports = {
   },
   performance: {
     hints: false
-  }
+  },
+  plugins: [
+    new HardSourceWebpackPlugin()
+  ],
+  devtool: '#eval-source-map'
 };
 
 if (process.env.NODE_ENV === 'production') {

@@ -57,6 +57,7 @@ $navbar-divider-background-color: $dark;
 .editing {
   border: solid #5B6DCD 1px;
   box-sizing: content-box;
+  z-index: 200;
   box-shadow: 10px 10px 2px darken($dark, 2);
 
   .resize-handle {
