@@ -16,7 +16,7 @@ $ pip install -r requirements.txt
 $ npm install
 
 # compile js code
-$ npm run webpack
+$ npm run build
 ```
 
 ## Usage
