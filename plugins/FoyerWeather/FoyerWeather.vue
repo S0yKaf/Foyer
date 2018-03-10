@@ -16,9 +16,15 @@
           <input v-model="config.location">
           location
         </label>
+        <br />
         <label class="checkbox">
           <input v-model="config.unit">
           unit
+        </label>
+        <br />
+        <label class="checkbox">
+          <input v-model="config.apiKey">
+          apiKey
         </label>
       </div>
     </div>
@@ -81,6 +87,9 @@ export default {
     },
     'config.unit': function () {
       this.setConfig();
+    },
+    'config.apiKey': function () {
+      this.setConfig();
     }
   },
   computed: {
@@ -123,7 +132,7 @@ export default {
     color: $purple
   }
   .weatherData {
-    line-height: 1.3em;
+    line-height: 2em;
   }
   .edit a {
     margin: 0.2em;
