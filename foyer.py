@@ -18,25 +18,34 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
+import os
+import sys
 
 from bottle import run, post, get, route, static_file, request
 
 
+# determine if application is a script file or frozen exe
+if getattr(sys, 'frozen', False):
+    dir = os.path.dirname(sys.executable)
+elif __file__:
+    dir = '.'
+
+
 @route('/static/<path>')
 def static(path):
-    return static_file(path, root="static")
+    return static_file(path, root=dir + "/static")
 
 
 @post('/save')
 def saveConfig():
     # TODO make this more secure / error handling
-    with open('./static/config.json', 'w') as out:
+    with open(dir + '/static/config.json', 'w') as out:
         json.dump(request.json, out)
 
 
 @route('/')
 def index():
-    return static_file('index.html', root="static")
+    return static_file('index.html', root=dir + "/static")
 
 
 run(host='localhost', port=9001)
