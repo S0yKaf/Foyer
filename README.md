@@ -1,6 +1,8 @@
 # Foyer
 Self contained modular start page webserver.
 
+![](https://a.maro.xyz/rTVKgMd.png)
+
 ---
 
 # Installing
