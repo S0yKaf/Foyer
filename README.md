@@ -6,7 +6,7 @@ Self contained modular start page webserver.
 ---
 
 # Installing
-foyer is currently only available through the AUR or with manual download through the [release](https://github.com/Kiniamaro/Foyer/releases) page. It comes in a pre-packaged format that requires no additinal dependencies.
+foyer is currently only available through the AUR or with manual download through the [release](https://github.com/Kiniamaro/Foyer/releases) page. It comes in a pre-packaged format that requires no additional dependencies.
 
 ## AUR install
 ```bash
